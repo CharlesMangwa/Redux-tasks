@@ -22,17 +22,17 @@ export const setVisibilityFilter = (filter) => {
     case 'Active':
       return {
         type: SET_VISIBILITY,
-        filter: false,
+        filter,
       }
     case 'Completed':
       return {
         type: SET_VISIBILITY,
-        filter: true,
+        filter,
       }
     default:
       return {
         type: SET_VISIBILITY,
-        filter: 'All',
+        filter,
       }
   }
 }

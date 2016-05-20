@@ -1,19 +1,29 @@
 import React, { PropTypes } from 'react'
 
 function FilterLink(props) {
-  const { filter, setVisibilityFilter } = props
+  const { filter, text, active, setVisibilityFilter } = props
   return(
-    <span><a onClick={() => setVisibilityFilter(filter)} href="#">{filter}</a>&nbsp;|&nbsp;</span>
+    <span>
+      <a
+        onClick={() => setVisibilityFilter(filter)}
+        href="#"
+        style={{
+          textDecoration: filter == active ? 'none' : 'underline',
+          color: filter == active ? 'black' : 'blue'
+        }}
+      >
+        {text}
+      </a>&nbsp;|&nbsp;
+    </span>
   )
 }
 
 FilterLink.propTypes = {
-  filter: PropTypes.string,
   setVisibilityFilter: PropTypes.func,
 }
 
 FilterLink.defaultProp = {
-  filter: 'All',
+  filter: false,
 }
 
 export default FilterLink

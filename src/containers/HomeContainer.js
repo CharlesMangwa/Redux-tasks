@@ -9,6 +9,7 @@ import { setVisibilityFilter } from './../store/modules/filter'
 class HomeContainer extends Component {
   state = {
     tasks: [],
+    filter: 'All'
   }
 
   componentWillMount(){
@@ -35,9 +36,8 @@ class HomeContainer extends Component {
     dispatch(setVisibilityFilter(filter))
   }
 
-
   render() {
-    const { tasks } = this.props
+    const { tasks, filter } = this.props
     return (
       <div>
         <div><Link to="/about">• About</Link></div>&nbsp;
@@ -48,7 +48,13 @@ class HomeContainer extends Component {
             <button type="submit">Valider</button>
           </form>
           <ul>
-            { tasks.map((task, index) => (
+            {
+              tasks.filter(task => {
+                if (!task.completed == filter || filter == 'All') {
+                  return task
+                }
+                return (false)
+              }).map((task, index) => (
               <Task
                 key={index}
                 index={index}
@@ -61,9 +67,9 @@ class HomeContainer extends Component {
           </ul>
           <div>
             <strong>Show: </strong>
-            <FilterLink filter='All' setVisibilityFilter={::this.setVisibilityFilter}/>
-            <FilterLink filter='Active' setVisibilityFilter={::this.setVisibilityFilter}/>
-            <FilterLink filter='Completed' setVisibilityFilter={::this.setVisibilityFilter}/>
+            <FilterLink filter='All' text='All' active={filter} setVisibilityFilter={::this.setVisibilityFilter}/>
+            <FilterLink filter={true} text='Active' active={filter} setVisibilityFilter={::this.setVisibilityFilter}/>
+            <FilterLink filter={false} text='Completed' active={filter} setVisibilityFilter={::this.setVisibilityFilter}/>
           </div>
         </div>
       </div>
@@ -72,5 +78,6 @@ class HomeContainer extends Component {
 }
 
 export default connect(state => ({
-  tasks: state.tasks
+  tasks: state.tasks,
+  filter: state.filter
 }))(HomeContainer)
