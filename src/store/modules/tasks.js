@@ -58,17 +58,17 @@ export default tasks
 
 export const fetchTasks = () => ({
   types: [TASKS_FETCH_REQUESTED, TASKS_FETCH_SUCCEEDED, TASKS_FETCH_FAILED ],
-  promise: fetch()
+  promise: fetch(),
 })
 
 export const addTask = (name, author) => ({
   type: TASK_ADD,
   name,
   author,
-  completed: false
+  completed: false,
 })
 
 export const deleteTask = (index) => ({
   type: TASK_DELETE,
-  index
+  index,
 })

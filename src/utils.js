@@ -1,7 +1,8 @@
 export function fetch() {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve([{
+      resolve(
+      [{
         name: 'Task 2',
         author: 'Charles',
         completed: false,
@@ -9,7 +10,10 @@ export function fetch() {
         name: 'Task 3',
         author: 'Ulysse',
         completed: false,
-      }])
+      }],
+      {
+        visibility: true
+      })
     }, 1000);
   })
 }

@@ -6,7 +6,7 @@ function Task(props) {
       <li style={{
           textDecoration: completed ? 'line-through' : 'none'
         }}>
-        <strong>{name}</strong> de {author}
+        <strong>{name}</strong> de {author}&nbsp;
         <button
           onClick={() => deleteTask(index)}
           >

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import Task from './../components/Task/index'
-import { fetchTasks, deleteTask, addTask } from './../store/modules/tasks'
+import FilterLink from './../components/FilterLink/index'
+import { fetchTasks, addTask, deleteTask } from './../store/modules/tasks'
+import { setVisibilityFilter } from './../store/modules/filter'
 
 class HomeContainer extends Component {
   state = {
@@ -24,34 +26,46 @@ class HomeContainer extends Component {
   }
 
   deleteTask(index){
-    const { dispatch } = this.props;
+    const { dispatch } = this.props
     dispatch(deleteTask(index))
   }
 
+  setVisibilityFilter(filter){
+    const { dispatch } = this.props
+    dispatch(setVisibilityFilter(filter))
+  }
 
 
   render() {
     const { tasks } = this.props
     return (
       <div>
-        <form onSubmit={::this.addTask}>
-          <input ref="name" placeholder="Name" />
-          <input ref="author" placeholder="Author" />
-          <button type="submit">Valider</button>
-        </form>
-        <ul>
-          { tasks.map((task, index) => (
-            <Task
-              key={index}
-              index={index}
-              name={task.name}
-              author={task.author}
-              completed={task.completed}
-              deleteTask={::this.deleteTask}
-            />
-          )) }
-        </ul>
-        <Link to="/about">About</Link>
+        <div><Link to="/about">• About</Link></div>&nbsp;
+        <div>
+          <form onSubmit={::this.addTask}>
+            <input ref="name" placeholder="Name" />&nbsp;
+            <input ref="author" placeholder="Author" />&nbsp;
+            <button type="submit">Valider</button>
+          </form>
+          <ul>
+            { tasks.map((task, index) => (
+              <Task
+                key={index}
+                index={index}
+                name={task.name}
+                author={task.author}
+                completed={task.completed}
+                deleteTask={::this.deleteTask}
+                />
+            )) }
+          </ul>
+          <div>
+            <strong>Show: </strong>
+            <FilterLink filter='All' setVisibilityFilter={::this.setVisibilityFilter}/>
+            <FilterLink filter='Active' setVisibilityFilter={::this.setVisibilityFilter}/>
+            <FilterLink filter='Completed' setVisibilityFilter={::this.setVisibilityFilter}/>
+          </div>
+        </div>
       </div>
     );
   }
