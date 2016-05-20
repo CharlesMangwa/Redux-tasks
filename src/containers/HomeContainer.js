@@ -16,19 +16,6 @@ class HomeContainer extends Component {
     }
   }
 
-  // _onSubmit(e){
-  //   e.preventDefault()
-  //   const {name, author} = this.refs
-  //   const { tasks } = this.state
-  //   tasks.push({
-  //     name: name.value,
-  //     author: author.value,
-  //   })
-  //   this.setState({tasks})
-  //   console.log(`Name: ${name.value}`)
-  //   console.log(`Author: ${author.value}`)
-  // }
-
   addTask(e){
     e.preventDefault()
     const { dispatch } = this.props
