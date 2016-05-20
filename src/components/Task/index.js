@@ -1,12 +1,16 @@
 import React, { PropTypes } from 'react'
 
 function Task(props) {
-    const {name, author, index, deleteTask } = props
+    const { index, name, author, completed, deleteTask } = props
     return (
-      <li>
+      <li style={{
+          textDecoration: completed ? 'line-through' : 'none'
+        }}>
         <strong>{name}</strong> de {author}
-        <button onClick={() => deleteTask(index)}>
-          Remove
+        <button
+          onClick={() => deleteTask(index)}
+          >
+          Done
         </button>
       </li>
     )

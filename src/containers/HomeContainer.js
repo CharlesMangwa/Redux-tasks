@@ -25,7 +25,6 @@ class HomeContainer extends Component {
 
   deleteTask(index){
     const { dispatch } = this.props;
-    console.log(this.props);
     dispatch(deleteTask(index))
   }
 
@@ -47,6 +46,7 @@ class HomeContainer extends Component {
               index={index}
               name={task.name}
               author={task.author}
+              completed={task.completed}
               deleteTask={::this.deleteTask}
             />
           )) }
